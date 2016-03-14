@@ -104,6 +104,11 @@ namespace JintDebugger
                 }
 
                 _debugControls.Clear();
+
+                foreach (var control in _dockPanel.Documents.OfType<EditorControl>())
+                {
+                    control.Script = null;
+                }
             }
 
             UpdateEnabled();
