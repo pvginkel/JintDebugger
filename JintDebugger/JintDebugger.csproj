@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{39728704-0A80-44CC-AE2C-8365B2EFA1EA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>JintDebugger</RootNamespace>
+    <AssemblyName>JintDebugger</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.TextEditor, Version=3.2.1.6466, Culture=neutral, PublicKeyToken=4d61825e8dd49f1a, processorArchitecture=MSIL">
+      <HintPath>..\packages\ICSharpCode.TextEditor.3.2.1.6466\lib\Net20\ICSharpCode.TextEditor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="SystemEx, Version=14.5.31.5, Culture=neutral, PublicKeyToken=b07f240bd4274843, processorArchitecture=MSIL">
+      <HintPath>..\packages\SystemEx.14.5.31.5\lib\net20\SystemEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ThemeVS2012Light, Version=2.9.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
+      <HintPath>..\packages\DockPanelSuite.ThemeVS2012Light.2.10.0-beta2\lib\net40\ThemeVS2012Light.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.9.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
+      <HintPath>..\packages\DockPanelSuite.2.10.0-beta2\lib\net40\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BreakPointMark.cs" />
+    <Compile Include="BreakType.cs" />
+    <Compile Include="CallStackControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CallStackControl.Designer.cs">
+      <DependentUpon>CallStackControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CaretMark.cs" />
+    <Compile Include="Continuation.cs" />
+    <Compile Include="IJintSessionCallback.cs" />
+    <Compile Include="Debugger.cs" />
+    <Compile Include="JintDebuggerSteppedEventHandler.cs" />
+    <Compile Include="JintDebuggerStoppedEventHandler.cs" />
+    <Compile Include="Session.cs" />
+    <Compile Include="VariablesControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VariablesControl.Designer.cs">
+      <DependentUpon>VariablesControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VariablesMode.cs" />
+    <Compile Include="EditorBreakPoint.cs" />
+    <Compile Include="EditorControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditorControl.Designer.cs">
+      <DependentUpon>EditorControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditorScript.cs" />
+    <Compile Include="EngineCreatedEventHandler.cs" />
+    <Compile Include="IStatusBarProvider.cs" />
+    <Compile Include="JavaScriptForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="JavaScriptForm.Designer.cs">
+      <DependentUpon>JavaScriptForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NeutralResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NeutralResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="OutputControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OutputControl.Designer.cs">
+      <DependentUpon>OutputControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Jint\Jint\Jint.csproj">
+      <Project>{678738da-f723-4920-b9e5-cad667104bda}</Project>
+      <Name>Jint</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CallStackControl.resx">
+      <DependentUpon>CallStackControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VariablesControl.resx">
+      <DependentUpon>VariablesControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditorControl.resx">
+      <DependentUpon>EditorControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="JavaScriptForm.resx">
+      <DependentUpon>JavaScriptForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NeutralResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>NeutralResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OutputControl.resx">
+      <DependentUpon>OutputControl.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\break.png" />
+    <Content Include="Resources\continue.png" />
+    <Content Include="Resources\step-into.png" />
+    <Content Include="Resources\step-out.png" />
+    <Content Include="Resources\step-over.png" />
+    <Content Include="Resources\stop-process.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,4 @@
+[submodule "Jint"]
+	path = Jint
+	url = https://github.com/pvginkel/jint.git
+	branch = debugger-improvements

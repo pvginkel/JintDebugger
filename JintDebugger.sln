@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JintDebugger", "JintDebugger\JintDebugger.csproj", "{39728704-0A80-44CC-AE2C-8365B2EFA1EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JintDebugger.Demo", "JintDebugger.Demo\JintDebugger.Demo.csproj", "{45A1C2BD-B99F-4BBF-BD16-9D314C0E42E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jint", "Jint\Jint\Jint.csproj", "{678738DA-F723-4920-B9E5-CAD667104BDA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{39728704-0A80-44CC-AE2C-8365B2EFA1EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39728704-0A80-44CC-AE2C-8365B2EFA1EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39728704-0A80-44CC-AE2C-8365B2EFA1EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39728704-0A80-44CC-AE2C-8365B2EFA1EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45A1C2BD-B99F-4BBF-BD16-9D314C0E42E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45A1C2BD-B99F-4BBF-BD16-9D314C0E42E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45A1C2BD-B99F-4BBF-BD16-9D314C0E42E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45A1C2BD-B99F-4BBF-BD16-9D314C0E42E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{678738DA-F723-4920-B9E5-CAD667104BDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{678738DA-F723-4920-B9E5-CAD667104BDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{678738DA-F723-4920-B9E5-CAD667104BDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{678738DA-F723-4920-B9E5-CAD667104BDA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
