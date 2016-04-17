@@ -93,7 +93,7 @@ namespace JintDebugger
 
         private JsValue Assert(JsValue thisObject, JsValue[] arguments)
         {
-            if (!TypeConverter.ToBoolean(arguments.Length == 0 ? JsValue.Null : arguments[0]))
+            if (!TypeConverter.ToBoolean(arguments.At(0)))
             {
                 if (arguments.Length > 1)
                     arguments[0] = "Assertion failed:";
@@ -185,7 +185,7 @@ namespace JintDebugger
 
         private JsValue Time(JsValue thisObject, JsValue[] arguments)
         {
-            string name = arguments.Length == 0 ? String.Empty : arguments[0].ToString();
+            string name = arguments.At(0).ToString();
             if (!_timers.ContainsKey(name))
                 _timers.Add(name, Stopwatch.StartNew());
             return JsValue.Undefined;
@@ -193,7 +193,7 @@ namespace JintDebugger
 
         private JsValue TimeEnd(JsValue thisObject, JsValue[] arguments)
         {
-            string name = arguments.Length == 0 ? String.Empty : arguments[0].ToString();
+            string name = arguments.At(0).ToString();
             Stopwatch stopwatch;
             if (_timers.TryGetValue(name, out stopwatch))
             {
