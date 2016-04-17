@@ -38,13 +38,7 @@
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this._statusCh = new System.Windows.Forms.ToolStripStatusLabel();
             this._debugToolStrip = new System.Windows.Forms.ToolStrip();
-            this._run = new System.Windows.Forms.ToolStripButton();
-            this._break = new System.Windows.Forms.ToolStripButton();
-            this._stop = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this._stepInto = new System.Windows.Forms.ToolStripButton();
-            this._stepOver = new System.Windows.Forms.ToolStripButton();
-            this._stepOut = new System.Windows.Forms.ToolStripButton();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this._file = new System.Windows.Forms.ToolStripMenuItem();
             this._fileNew = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,7 +55,6 @@
             this._viewGlobals = new System.Windows.Forms.ToolStripMenuItem();
             this._viewCallStack = new System.Windows.Forms.ToolStripMenuItem();
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this._debugRun = new System.Windows.Forms.ToolStripMenuItem();
             this._debugBreak = new System.Windows.Forms.ToolStripMenuItem();
             this._debugStop = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
@@ -71,6 +64,13 @@
             this._window = new System.Windows.Forms.ToolStripMenuItem();
             this._windowNextTab = new System.Windows.Forms.ToolStripMenuItem();
             this._windowPreviousTab = new System.Windows.Forms.ToolStripMenuItem();
+            this._run = new System.Windows.Forms.ToolStripButton();
+            this._break = new System.Windows.Forms.ToolStripButton();
+            this._stop = new System.Windows.Forms.ToolStripButton();
+            this._stepInto = new System.Windows.Forms.ToolStripButton();
+            this._stepOver = new System.Windows.Forms.ToolStripButton();
+            this._stepOut = new System.Windows.Forms.ToolStripButton();
+            this._debugRun = new System.Windows.Forms.ToolStripMenuItem();
             this._statusStrip.SuspendLayout();
             this._debugToolStrip.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -159,70 +159,10 @@
             this._debugToolStrip.TabIndex = 3;
             this._debugToolStrip.Text = "toolStrip1";
             // 
-            // _run
-            // 
-            this._run.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this._run.Image = global::JintDebugger.NeutralResources._continue;
-            this._run.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this._run.Name = "_run";
-            this._run.Size = new System.Drawing.Size(23, 22);
-            this._run.Text = "Run";
-            this._run.Click += new System.EventHandler(this._run_Click);
-            // 
-            // _break
-            // 
-            this._break.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this._break.Image = global::JintDebugger.NeutralResources._break;
-            this._break.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this._break.Name = "_break";
-            this._break.Size = new System.Drawing.Size(23, 22);
-            this._break.Text = "Break next statement";
-            this._break.Click += new System.EventHandler(this._break_Click);
-            // 
-            // _stop
-            // 
-            this._stop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this._stop.Image = global::JintDebugger.NeutralResources.stop_process;
-            this._stop.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this._stop.Name = "_stop";
-            this._stop.Size = new System.Drawing.Size(23, 22);
-            this._stop.Text = "Stop program";
-            this._stop.Click += new System.EventHandler(this._stop_Click);
-            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // _stepInto
-            // 
-            this._stepInto.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this._stepInto.Image = global::JintDebugger.NeutralResources.step_into;
-            this._stepInto.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this._stepInto.Name = "_stepInto";
-            this._stepInto.Size = new System.Drawing.Size(23, 22);
-            this._stepInto.Text = "Step into";
-            this._stepInto.Click += new System.EventHandler(this._stepInto_Click);
-            // 
-            // _stepOver
-            // 
-            this._stepOver.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this._stepOver.Image = global::JintDebugger.NeutralResources.step_over;
-            this._stepOver.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this._stepOver.Name = "_stepOver";
-            this._stepOver.Size = new System.Drawing.Size(23, 22);
-            this._stepOver.Text = "Step over";
-            this._stepOver.Click += new System.EventHandler(this._stepOver_Click);
-            // 
-            // _stepOut
-            // 
-            this._stepOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this._stepOut.Image = global::JintDebugger.NeutralResources.step_out;
-            this._stepOut.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this._stepOut.Name = "_stepOut";
-            this._stepOut.Size = new System.Drawing.Size(23, 22);
-            this._stepOut.Text = "Step out";
-            this._stepOut.Click += new System.EventHandler(this._stepOut_Click);
             // 
             // menuStrip1
             // 
@@ -330,21 +270,21 @@
             // _viewLocals
             // 
             this._viewLocals.Name = "_viewLocals";
-            this._viewLocals.Size = new System.Drawing.Size(125, 22);
+            this._viewLocals.Size = new System.Drawing.Size(152, 22);
             this._viewLocals.Text = "&Locals";
             this._viewLocals.Click += new System.EventHandler(this._viewLocals_Click);
             // 
             // _viewGlobals
             // 
             this._viewGlobals.Name = "_viewGlobals";
-            this._viewGlobals.Size = new System.Drawing.Size(125, 22);
+            this._viewGlobals.Size = new System.Drawing.Size(152, 22);
             this._viewGlobals.Text = "&Globals";
             this._viewGlobals.Click += new System.EventHandler(this._viewGlobals_Click);
             // 
             // _viewCallStack
             // 
             this._viewCallStack.Name = "_viewCallStack";
-            this._viewCallStack.Size = new System.Drawing.Size(125, 22);
+            this._viewCallStack.Size = new System.Drawing.Size(152, 22);
             this._viewCallStack.Text = "&Call Stack";
             this._viewCallStack.Click += new System.EventHandler(this._viewCallStack_Click);
             // 
@@ -362,16 +302,9 @@
             this.debugToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
             this.debugToolStripMenuItem.Text = "&Debug";
             // 
-            // _debugRun
-            // 
-            this._debugRun.Name = "_debugRun";
-            this._debugRun.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this._debugRun.Size = new System.Drawing.Size(177, 22);
-            this._debugRun.Text = "&Run";
-            this._debugRun.Click += new System.EventHandler(this._run_Click);
-            // 
             // _debugBreak
             // 
+            this._debugBreak.Image = global::JintDebugger.NeutralResources._break;
             this._debugBreak.Name = "_debugBreak";
             this._debugBreak.Size = new System.Drawing.Size(177, 22);
             this._debugBreak.Text = "&Break";
@@ -379,6 +312,7 @@
             // 
             // _debugStop
             // 
+            this._debugStop.Image = global::JintDebugger.NeutralResources.stop_process;
             this._debugStop.Name = "_debugStop";
             this._debugStop.Size = new System.Drawing.Size(177, 22);
             this._debugStop.Text = "&Stop";
@@ -391,6 +325,7 @@
             // 
             // _debugStepInto
             // 
+            this._debugStepInto.Image = global::JintDebugger.NeutralResources.step_into;
             this._debugStepInto.Name = "_debugStepInto";
             this._debugStepInto.ShortcutKeys = System.Windows.Forms.Keys.F11;
             this._debugStepInto.Size = new System.Drawing.Size(177, 22);
@@ -399,6 +334,7 @@
             // 
             // _debugStepOver
             // 
+            this._debugStepOver.Image = global::JintDebugger.NeutralResources.step_over;
             this._debugStepOver.Name = "_debugStepOver";
             this._debugStepOver.ShortcutKeys = System.Windows.Forms.Keys.F10;
             this._debugStepOver.Size = new System.Drawing.Size(177, 22);
@@ -407,6 +343,7 @@
             // 
             // _debugStepOut
             // 
+            this._debugStepOut.Image = global::JintDebugger.NeutralResources.step_out;
             this._debugStepOut.Name = "_debugStepOut";
             this._debugStepOut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.F11)));
             this._debugStepOut.Size = new System.Drawing.Size(177, 22);
@@ -438,6 +375,75 @@
             this._windowPreviousTab.Size = new System.Drawing.Size(226, 22);
             this._windowPreviousTab.Text = "&Previous Tab";
             this._windowPreviousTab.Click += new System.EventHandler(this._windowPreviousTab_Click);
+            // 
+            // _run
+            // 
+            this._run.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._run.Image = global::JintDebugger.NeutralResources._continue;
+            this._run.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._run.Name = "_run";
+            this._run.Size = new System.Drawing.Size(23, 22);
+            this._run.Text = "Run";
+            this._run.Click += new System.EventHandler(this._run_Click);
+            // 
+            // _break
+            // 
+            this._break.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._break.Image = global::JintDebugger.NeutralResources._break;
+            this._break.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._break.Name = "_break";
+            this._break.Size = new System.Drawing.Size(23, 22);
+            this._break.Text = "Break next statement";
+            this._break.Click += new System.EventHandler(this._break_Click);
+            // 
+            // _stop
+            // 
+            this._stop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._stop.Image = global::JintDebugger.NeutralResources.stop_process;
+            this._stop.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._stop.Name = "_stop";
+            this._stop.Size = new System.Drawing.Size(23, 22);
+            this._stop.Text = "Stop program";
+            this._stop.Click += new System.EventHandler(this._stop_Click);
+            // 
+            // _stepInto
+            // 
+            this._stepInto.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._stepInto.Image = global::JintDebugger.NeutralResources.step_into;
+            this._stepInto.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._stepInto.Name = "_stepInto";
+            this._stepInto.Size = new System.Drawing.Size(23, 22);
+            this._stepInto.Text = "Step into";
+            this._stepInto.Click += new System.EventHandler(this._stepInto_Click);
+            // 
+            // _stepOver
+            // 
+            this._stepOver.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._stepOver.Image = global::JintDebugger.NeutralResources.step_over;
+            this._stepOver.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._stepOver.Name = "_stepOver";
+            this._stepOver.Size = new System.Drawing.Size(23, 22);
+            this._stepOver.Text = "Step over";
+            this._stepOver.Click += new System.EventHandler(this._stepOver_Click);
+            // 
+            // _stepOut
+            // 
+            this._stepOut.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._stepOut.Image = global::JintDebugger.NeutralResources.step_out;
+            this._stepOut.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._stepOut.Name = "_stepOut";
+            this._stepOut.Size = new System.Drawing.Size(23, 22);
+            this._stepOut.Text = "Step out";
+            this._stepOut.Click += new System.EventHandler(this._stepOut_Click);
+            // 
+            // _debugRun
+            // 
+            this._debugRun.Image = global::JintDebugger.NeutralResources.start;
+            this._debugRun.Name = "_debugRun";
+            this._debugRun.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this._debugRun.Size = new System.Drawing.Size(177, 22);
+            this._debugRun.Text = "&Run";
+            this._debugRun.Click += new System.EventHandler(this._run_Click);
             // 
             // JavaScriptForm
             // 

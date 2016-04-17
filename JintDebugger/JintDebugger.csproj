@@ -146,6 +146,7 @@
   <ItemGroup>
     <Content Include="Resources\break.png" />
     <Content Include="Resources\continue.png" />
+    <None Include="Resources\start.png" />
     <Content Include="Resources\step-into.png" />
     <Content Include="Resources\step-out.png" />
     <Content Include="Resources\step-over.png" />
