@@ -56,8 +56,6 @@ namespace JintDebugger
 
             _callStackControl.Show(_dockPanel, DockState.DockBottom);
 
-            _outputControl.DockHandler.Activate();
-
             ResetTabs();
 
             SetDebugger(null);
@@ -82,19 +80,9 @@ namespace JintDebugger
             _viewCallStack.Enabled =
                 _debugger != null;
 
-            if (_debugger != null)
-            {
-                _localsControl.DockHandler.Show();
-                _globalsControl.DockHandler.Show();
-                _callStackControl.DockHandler.Show();
-                _outputControl.DockHandler.Activate();
-            }
-            else
-            {
-                _localsControl.DockHandler.Hide();
-                _globalsControl.DockHandler.Hide();
-                _callStackControl.DockHandler.Hide();
-            }
+            _localsControl.DockHandler.IsHidden = _debugger == null;
+            _globalsControl.DockHandler.IsHidden = _debugger == null;
+            _callStackControl.DockHandler.IsHidden = _debugger == null;
 
             if (_debugger == null)
             {
@@ -437,6 +425,8 @@ namespace JintDebugger
 
         private void SetupEngine(Engine engine)
         {
+            engine.SetValue("console", FirebugConsole.CreateFirebugConsole(engine, _outputControl.CreateFirebugConsoleOutput(engine)));
+
             OnEngineCreated(new EngineCreatedEventArgs(engine));
         }
 

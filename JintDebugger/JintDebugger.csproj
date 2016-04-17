@@ -68,11 +68,15 @@
     </Compile>
     <Compile Include="CaretMark.cs" />
     <Compile Include="Continuation.cs" />
+    <Compile Include="FirebugConsole.cs" />
+    <Compile Include="FirebugConsoleMessageStyle.cs" />
+    <Compile Include="IFirebugConsoleOutput.cs" />
     <Compile Include="IJintSessionCallback.cs" />
     <Compile Include="Debugger.cs" />
     <Compile Include="JintDebuggerSteppedEventHandler.cs" />
     <Compile Include="JintDebuggerStoppedEventHandler.cs" />
     <Compile Include="Session.cs" />
+    <Compile Include="StandardConsoleOutput.cs" />
     <Compile Include="VariablesControl.cs">
       <SubType>Form</SubType>
     </Compile>
