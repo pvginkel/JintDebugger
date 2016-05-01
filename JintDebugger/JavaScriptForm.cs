@@ -24,13 +24,25 @@ namespace JintDebugger
         private readonly Dictionary<Script, EditorControl> _debugControls = new Dictionary<Script, EditorControl>();
         private EditorControl _lastStepControl;
 
+        protected new MenuStrip Menu => _menu;
+
+        protected DockPanel DockPanel => _dockPanel;
+
+        public EditorCollection Editors { get; }
+
         public event EngineCreatedEventHandler EngineCreated;
 
-        private EditorControl ActiveEditor => _dockPanel.ActiveDocument as EditorControl;
+        private IEditor ActiveEditor => _dockPanel.ActiveDocument as IEditor;
+
+        public event EditorEventHandler EditorOpened;
+
+        public event EditorEventHandler EditorClosed;
 
         public JavaScriptForm()
         {
             InitializeComponent();
+
+            Editors = new EditorCollection(_dockPanel);
 
             _dockPanel.Theme = new VS2012LightTheme();
 
@@ -234,19 +246,39 @@ namespace JintDebugger
             }
         }
 
+        public IEditor FindEditor(string fileName)
+        {
+            if (fileName == null)
+                return null;
+
+            return Editors.FirstOrDefault(p => p.FileName.Equals(fileName, StringComparison.OrdinalIgnoreCase));
+        }
+
         public void OpenEditor()
         {
             OpenEditor(null);
         }
 
-        public void OpenEditor(string fileName)
+        public IEditor OpenEditor(string fileName)
         {
-            var editor = new EditorControl(this);
+            var editor = (EditorControl)FindEditor(fileName);
+            if (editor != null)
+            {
+                editor.Show();
+            }
+            else
+            {
+                editor = new EditorControl(this);
 
-            if (fileName != null)
-                editor.Open(fileName);
+                if (fileName != null)
+                    editor.Open(fileName);
 
-            editor.Show(_dockPanel, DockState.Document);
+                editor.Show(_dockPanel, DockState.Document);
+
+                OnEditorOpened(new EditorEventArgs(editor));
+            }
+
+            return editor;
         }
 
         private void _dockPanel_ActiveDocumentChanged(object sender, EventArgs e)
@@ -286,12 +318,12 @@ namespace JintDebugger
 
         private void _fileSave_Click(object sender, EventArgs e)
         {
-            ActiveEditor.PerformSave();
+            ActiveEditor.Save();
         }
 
         private void _fileSaveAs_Click(object sender, EventArgs e)
         {
-            ActiveEditor.PerformSaveAs();
+            ActiveEditor.SaveAs();
         }
 
         private void _fileClose_Click(object sender, EventArgs e)
@@ -316,7 +348,7 @@ namespace JintDebugger
             if (documents.Count == 0)
                 return;
 
-            int activeDocumentIndex = documents.IndexOf(ActiveEditor);
+            int activeDocumentIndex = documents.IndexOf((IDockContent)ActiveEditor);
 
             if (activeDocumentIndex == -1)
                 activeDocumentIndex = 0;
@@ -406,7 +438,7 @@ namespace JintDebugger
         {
             foreach (var control in _dockPanel.Documents.OfType<EditorControl>())
             {
-                control.PerformSave();
+                control.Save();
             }
 
             ClearOutput();
@@ -445,6 +477,16 @@ namespace JintDebugger
         protected virtual void OnEngineCreated(EngineCreatedEventArgs e)
         {
             EngineCreated?.Invoke(this, e);
+        }
+
+        protected virtual void OnEditorOpened(EditorEventArgs e)
+        {
+            EditorOpened?.Invoke(this, e);
+        }
+
+        protected internal virtual void OnEditorClosed(EditorEventArgs e)
+        {
+            EditorClosed?.Invoke(this, e);
         }
     }
 }

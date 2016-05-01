@@ -13,7 +13,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace JintDebugger
 {
-    internal partial class EditorControl : DockContent
+    internal partial class EditorControl : DockContent, IEditor
     {
         private readonly IStatusBarProvider _statusBarProvider;
         private string _tabText;
@@ -96,7 +96,7 @@ namespace JintDebugger
             int lineHeight = textArea.TextView.FontHeight;
             int lineNumber = (yPos + textArea.VirtualTop.Y) / lineHeight;
 
-            if (BreakPoints.Any(p => p.Line == lineNumber + 1))
+            if (BreakPoints.Any(p => p.Line == lineNumber + 1) || lineNumber >= textArea.Document.TotalNumberOfLines)
                 return;
 
             string text = textArea.Document.GetText(textArea.Document.GetLineSegment(lineNumber));
@@ -233,7 +233,7 @@ namespace JintDebugger
             SetDirty(true);
         }
 
-        public void Save(string fileName)
+        public bool Save(string fileName)
         {
             if (fileName != null)
             {
@@ -243,6 +243,8 @@ namespace JintDebugger
 
             File.WriteAllText(FileName, _textEditor.Text);
             SetDirty(false);
+
+            return true;
         }
 
         public string GetText()
@@ -257,17 +259,15 @@ namespace JintDebugger
             SetDirty(false);
         }
 
-        public bool PerformSave()
+        public bool Save()
         {
             if (FileName == null)
-                return PerformSaveAs();
+                return SaveAs();
 
-            Save(null);
-
-            return true;
+            return Save(null);
         }
 
-        public bool PerformSaveAs()
+        public bool SaveAs()
         {
             using (var dialog = new SaveFileDialog())
             {
@@ -278,10 +278,7 @@ namespace JintDebugger
                 dialog.RestoreDirectory = true;
 
                 if (dialog.ShowDialog(this) == DialogResult.OK)
-                {
-                    Save(dialog.FileName);
-                    return true;
-                }
+                    return Save(dialog.FileName);
             }
 
             return false;
@@ -310,7 +307,7 @@ namespace JintDebugger
                 switch (result)
                 {
                     case DialogResult.Yes:
-                        if (!PerformSave())
+                        if (!Save())
                             return false;
                         break;
 
@@ -343,6 +340,15 @@ namespace JintDebugger
         private void EditorControl_FormClosed(object sender, FormClosedEventArgs e)
         {
             Script = null;
+
+            ((JavaScriptForm)Parent.FindForm()).OnEditorClosed(new EditorEventArgs(this));
+        }
+
+        public void Close(bool force)
+        {
+            IsDirty = false;
+
+            Close();
         }
     }
 }
