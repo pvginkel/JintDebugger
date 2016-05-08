@@ -4,17 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Jint.Native;
-using Jint.Runtime;
 
 namespace JintDebugger
 {
-    public class StandardConsoleOutput : IFirebugConsoleOutput
+    public class CaptureOutput : IFirebugConsoleOutput
     {
         private static readonly Regex NewlineRe = new Regex("\r?\n", RegexOptions.Compiled);
 
         private int _indentation;
         private int _indent;
+        private readonly StringBuilder _sb = new StringBuilder();
 
         public int Indentation
         {
@@ -28,40 +27,24 @@ namespace JintDebugger
             set { _indent = Math.Max(value, 0); }
         }
 
-        public StandardConsoleOutput()
+        public CaptureOutput()
         {
             Indent = 2;
         }
 
         public void Log(FirebugConsoleMessageStyle style, string value)
         {
-            var color = Console.ForegroundColor;
-            switch (style)
-            {
-                case FirebugConsoleMessageStyle.Information:
-                    Console.ForegroundColor = ConsoleColor.White;
-                    break;
-                case FirebugConsoleMessageStyle.Warning:
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    break;
-                case FirebugConsoleMessageStyle.Error:
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    break;
-            }
-
             string indent = new string(' ', Indentation);
 
             foreach (string line in NewlineRe.Split(value))
             {
-                Console.WriteLine(indent + line);
+                _sb.AppendLine(indent + line);
             }
-
-            Console.ForegroundColor = color;
         }
 
         public void Clear()
         {
-            Console.Clear();
+            _sb.Clear();
         }
 
         public void StartGroup(string title, bool initiallyCollapsed)
@@ -73,6 +56,11 @@ namespace JintDebugger
         public void EndGroup()
         {
             Indentation -= Indent;
+        }
+
+        public override string ToString()
+        {
+            return _sb.ToString();
         }
     }
 }

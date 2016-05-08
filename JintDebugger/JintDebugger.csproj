@@ -66,6 +66,7 @@
     <Compile Include="CallStackControl.Designer.cs">
       <DependentUpon>CallStackControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="CaptureOutput.cs" />
     <Compile Include="CaretMark.cs" />
     <Compile Include="Continuation.cs" />
     <Compile Include="EditorCollection.cs" />

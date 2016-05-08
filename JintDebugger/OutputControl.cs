@@ -67,8 +67,13 @@ namespace JintDebugger
 
             private void AppendText(string message)
             {
-                _textEditor.AppendText(message);
-                _textEditor.AppendText(Environment.NewLine);
+                string indent = new string(' ', _indentation);
+
+                foreach (string line in NewlineRe.Split(message))
+                {
+                    _textEditor.AppendText(indent + line);
+                    _textEditor.AppendText(Environment.NewLine);
+                }
             }
 
             public void Clear()
