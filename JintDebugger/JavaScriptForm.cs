@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -7,14 +8,18 @@ using System.Threading;
 using System.Windows.Forms;
 using Jint;
 using Jint.Parser;
+using Jint.Runtime;
 using Jint.Runtime.Debugger;
 using WeifenLuo.WinFormsUI.Docking;
+using VS2012LightTheme = JintDebugger.Support.DockPanelTheme.VS2012LightTheme;
 
 namespace JintDebugger
 {
     public partial class JavaScriptForm : SystemEx.Windows.Forms.Form, IStatusBarProvider
     {
         public const string FileDialogFilter = "JavaScript (*.js)|*.js|All Files (*.*)|*.*";
+        private static readonly Color StatusBarNormalColor = Color.FromArgb(0, 122, 204);
+        private static readonly Color StatusBarRunColor = Color.FromArgb(202, 81, 0);
 
         private readonly OutputControl _outputControl;
         private readonly VariablesControl _localsControl;
@@ -203,6 +208,13 @@ namespace JintDebugger
             if (exception == null || exception is ThreadAbortException || exception.InnerException is ThreadAbortException)
                 return;
 
+            var javaScriptException = exception as JavaScriptException;
+            if (javaScriptException != null)
+            {
+                ExceptionForm.Show(this, javaScriptException);
+                return;
+            }
+
             MessageBox.Show(
                 this,
                 new StringBuilder()
@@ -314,6 +326,8 @@ namespace JintDebugger
                 _stepOver.Enabled = _debugStepOver.Enabled = !_debugger.IsRunning;
                 _stepOut.Enabled = _debugStepOut.Enabled = !_debugger.IsRunning;
             }
+
+            _statusStrip.BackColor = _debugger == null ? StatusBarNormalColor : StatusBarRunColor;
         }
 
         private void _fileSave_Click(object sender, EventArgs e)

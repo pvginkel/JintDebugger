@@ -48,10 +48,6 @@
       <HintPath>..\packages\SystemEx.14.5.31.5\lib\net20\SystemEx.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="ThemeVS2012Light, Version=2.9.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
-      <HintPath>..\packages\DockPanelSuite.ThemeVS2012Light.2.10.0-beta2\lib\net40\ThemeVS2012Light.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.9.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
       <HintPath>..\packages\DockPanelSuite.2.10.0-beta2\lib\net40\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
       <Private>True</Private>
@@ -71,16 +67,55 @@
     <Compile Include="Continuation.cs" />
     <Compile Include="EditorCollection.cs" />
     <Compile Include="EditorEventHandler.cs" />
+    <Compile Include="ExceptionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ExceptionForm.Designer.cs">
+      <DependentUpon>ExceptionForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="FirebugConsole.cs" />
     <Compile Include="FirebugConsoleMessageStyle.cs" />
     <Compile Include="IEditor.cs" />
     <Compile Include="IFirebugConsoleOutput.cs" />
     <Compile Include="IJintSessionCallback.cs" />
     <Compile Include="Debugger.cs" />
+    <Compile Include="ImageBookmark.cs" />
     <Compile Include="JintDebuggerSteppedEventHandler.cs" />
     <Compile Include="JintDebuggerStoppedEventHandler.cs" />
+    <Compile Include="ListViewExtensions.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="StandardConsoleOutput.cs" />
+    <Compile Include="Support\DockPanelTheme\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Support\DockPanelTheme\Strings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Support\DockPanelTheme\VS2012LightAutoHideStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Support\DockPanelTheme\VS2012LightAutoHideWindowControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Support\DockPanelTheme\VS2012LightDockPaneCaption.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Support\DockPanelTheme\VS2012LightDockPaneStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Support\DockPanelTheme\VS2012LightDockWindow.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Support\DockPanelTheme\VS2012LightSplitterControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Support\DockPanelTheme\VS2012LightTheme.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="VariablesControl.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,6 +162,17 @@
     <EmbeddedResource Include="CallStackControl.resx">
       <DependentUpon>CallStackControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ExceptionForm.resx">
+      <DependentUpon>ExceptionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Support\DockPanelTheme\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Support\DockPanelTheme\Strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="VariablesControl.resx">
       <DependentUpon>VariablesControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -149,8 +195,30 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\break.png" />
+    <Content Include="Support\DockPanelTheme\Resources\ActiveTabHover_Close.png" />
+    <Content Include="Support\DockPanelTheme\Resources\ActiveTab_Close.png" />
+    <Content Include="Support\DockPanelTheme\Resources\Dockindicator_PaneDiamond.png" />
+    <Content Include="Support\DockPanelTheme\Resources\DockIndicator_PaneDiamond1.bmp" />
+    <Content Include="Support\DockPanelTheme\Resources\Dockindicator_PaneDiamond_Fill.png" />
+    <Content Include="Support\DockPanelTheme\Resources\Dockindicator_PaneDiamond_Hotspot.png" />
+    <Content Include="Support\DockPanelTheme\Resources\DockIndicator_PaneDiamond_HotspotIndex.png" />
+    <Content Include="Support\DockPanelTheme\Resources\DockIndicator_PanelBottom.png" />
+    <Content Include="Support\DockPanelTheme\Resources\DockIndicator_PanelFill.png" />
+    <Content Include="Support\DockPanelTheme\Resources\DockIndicator_PanelLeft.png" />
+    <Content Include="Support\DockPanelTheme\Resources\DockIndicator_PanelRight.png" />
+    <Content Include="Support\DockPanelTheme\Resources\DockIndicator_PanelTop.png" />
+    <Content Include="Support\DockPanelTheme\Resources\DockPane_AutoHide.png" />
+    <Content Include="Support\DockPanelTheme\Resources\DockPane_Close.png" />
+    <Content Include="Support\DockPanelTheme\Resources\DockPane_Dock.png" />
+    <Content Include="Support\DockPanelTheme\Resources\DockPane_Option.png" />
+    <Content Include="Support\DockPanelTheme\Resources\DockPane_OptionOverflow.png" />
+    <Content Include="Support\DockPanelTheme\Resources\InactiveTabHover_Close.png" />
+    <Content Include="Support\DockPanelTheme\Resources\LostFocusTabHover_Close.png" />
+    <Content Include="Support\DockPanelTheme\Resources\LostFocusTab_Close.png" />
+    <None Include="Resources\breakpoint.png" />
     <Content Include="Resources\continue.png" />
     <None Include="Resources\start.png" />
+    <Content Include="Resources\executionPointer.png" />
     <Content Include="Resources\step-into.png" />
     <Content Include="Resources\step-out.png" />
     <Content Include="Resources\step-over.png" />

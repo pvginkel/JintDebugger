@@ -54,6 +54,7 @@
             this._fileSaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this._fileClose = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this._fileExit = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this._viewLocals = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,7 +71,6 @@
             this._window = new System.Windows.Forms.ToolStripMenuItem();
             this._windowNextTab = new System.Windows.Forms.ToolStripMenuItem();
             this._windowPreviousTab = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this._statusStrip.SuspendLayout();
             this._debugToolStrip.SuspendLayout();
             this._menu.SuspendLayout();
@@ -99,11 +99,13 @@
             this._statusStrip.Location = new System.Drawing.Point(0, 493);
             this._statusStrip.Name = "_statusStrip";
             this._statusStrip.Size = new System.Drawing.Size(691, 22);
+            this._statusStrip.SizingGrip = false;
             this._statusStrip.TabIndex = 3;
             this._statusStrip.Text = "statusStrip1";
             // 
             // _statusLabel
             // 
+            this._statusLabel.ForeColor = System.Drawing.Color.White;
             this._statusLabel.Name = "_statusLabel";
             this._statusLabel.Size = new System.Drawing.Size(609, 17);
             this._statusLabel.Spring = true;
@@ -111,34 +113,40 @@
             // 
             // toolStripStatusLabel2
             // 
+            this.toolStripStatusLabel2.ForeColor = System.Drawing.Color.White;
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
             this.toolStripStatusLabel2.Size = new System.Drawing.Size(20, 17);
             this.toolStripStatusLabel2.Text = "Ln";
             // 
             // _statusLine
             // 
+            this._statusLine.ForeColor = System.Drawing.Color.White;
             this._statusLine.Name = "_statusLine";
             this._statusLine.Size = new System.Drawing.Size(0, 17);
             // 
             // toolStripStatusLabel3
             // 
+            this.toolStripStatusLabel3.ForeColor = System.Drawing.Color.White;
             this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
             this.toolStripStatusLabel3.Size = new System.Drawing.Size(25, 17);
             this.toolStripStatusLabel3.Text = "Col";
             // 
             // _statusCol
             // 
+            this._statusCol.ForeColor = System.Drawing.Color.White;
             this._statusCol.Name = "_statusCol";
             this._statusCol.Size = new System.Drawing.Size(0, 17);
             // 
             // toolStripStatusLabel1
             // 
+            this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.White;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(22, 17);
             this.toolStripStatusLabel1.Text = "Ch";
             // 
             // _statusCh
             // 
+            this._statusCh.ForeColor = System.Drawing.Color.White;
             this._statusCh.Name = "_statusCh";
             this._statusCh.Size = new System.Drawing.Size(0, 17);
             // 
@@ -304,6 +312,11 @@
             this._fileClose.Text = "&Close";
             this._fileClose.Click += new System.EventHandler(this._fileClose_Click);
             // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(183, 6);
+            // 
             // _fileExit
             // 
             this._fileExit.Name = "_fileExit";
@@ -439,11 +452,6 @@
             this._windowPreviousTab.Size = new System.Drawing.Size(226, 22);
             this._windowPreviousTab.Text = "&Previous Tab";
             this._windowPreviousTab.Click += new System.EventHandler(this._windowPreviousTab_Click);
-            // 
-            // toolStripMenuItem5
-            // 
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(183, 6);
             // 
             // JavaScriptForm
             // 
