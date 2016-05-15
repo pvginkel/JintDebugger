@@ -29,10 +29,11 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this._dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this._exceptionThrown = new System.Windows.Forms.Label();
             this._additionalInformation = new System.Windows.Forms.Label();
             this._cancelButton = new System.Windows.Forms.Button();
-            this._dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
+            this._location = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -41,20 +42,33 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this._dockPanel, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this._location, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this._dockPanel, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this._exceptionThrown, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this._additionalInformation, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this._cancelButton, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this._cancelButton, 1, 4);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(9, 9);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 4;
+            this.tableLayoutPanel1.RowCount = 5;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.Size = new System.Drawing.Size(538, 330);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // _dockPanel
+            // 
+            this._dockPanel.AllowEndUserDocking = false;
+            this.tableLayoutPanel1.SetColumnSpan(this._dockPanel, 2);
+            this._dockPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._dockPanel.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingWindow;
+            this._dockPanel.Location = new System.Drawing.Point(3, 72);
+            this._dockPanel.Name = "_dockPanel";
+            this._dockPanel.Size = new System.Drawing.Size(532, 226);
+            this._dockPanel.TabIndex = 3;
             // 
             // _exceptionThrown
             // 
@@ -88,16 +102,16 @@
             this._cancelButton.Text = "Close";
             this._cancelButton.UseVisualStyleBackColor = true;
             // 
-            // _dockPanel
+            // _location
             // 
-            this._dockPanel.AllowEndUserDocking = false;
-            this.tableLayoutPanel1.SetColumnSpan(this._dockPanel, 2);
-            this._dockPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this._dockPanel.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingWindow;
-            this._dockPanel.Location = new System.Drawing.Point(3, 49);
-            this._dockPanel.Name = "_dockPanel";
-            this._dockPanel.Size = new System.Drawing.Size(532, 249);
-            this._dockPanel.TabIndex = 3;
+            this._location.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this._location, 2);
+            this._location.Location = new System.Drawing.Point(3, 51);
+            this._location.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this._location.Name = "_location";
+            this._location.Size = new System.Drawing.Size(68, 13);
+            this._location.TabIndex = 4;
+            this._location.Text = "Location: {0}";
             // 
             // ExceptionForm
             // 
@@ -127,5 +141,6 @@
         private System.Windows.Forms.Label _additionalInformation;
         private System.Windows.Forms.Button _cancelButton;
         private WeifenLuo.WinFormsUI.Docking.DockPanel _dockPanel;
+        private System.Windows.Forms.Label _location;
     }
 }

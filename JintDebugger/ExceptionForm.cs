@@ -36,6 +36,7 @@ namespace JintDebugger
             {
                 form._exceptionThrown.Text = String.Format(form._exceptionThrown.Text, GetType(exception));
                 form._additionalInformation.Text = String.Format(form._additionalInformation.Text, GetMessage(exception));
+                form._location.Text = String.Format(form._location.Text, GetLocation(exception));
 
                 var callStack = new CallStackControl();
                 callStack.LoadCallStack(exception.DebugInformation);
@@ -57,6 +58,27 @@ namespace JintDebugger
 
                 form.ShowDialog(owner);
             }
+        }
+
+        private static string GetLocation(JavaScriptException exception)
+        {
+            if (exception.Location != null)
+            {
+                return String.Format(
+                    "{0}({1},{2},{3},{4})",
+                    exception.Location.Source.Source,
+                    exception.Location.Start.Line,
+                    exception.Location.Start.Column + 1,
+                    exception.Location.End.Line,
+                    exception.Location.End.Column + 1
+                );
+            }
+
+            var stackTrace = exception.StackTrace;
+            if (stackTrace != null)
+                return stackTrace.Split(new[] { '\n' }, 2)[0].Trim();
+
+            return "(none)";
         }
 
         private static string GetMessage(JavaScriptException exception)
