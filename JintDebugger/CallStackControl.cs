@@ -39,16 +39,19 @@ namespace JintDebugger
 
             _listView.Enabled = true;
 
-            _listView.BeginUpdate();
-
-            _listView.Items.Clear();
-
-            foreach (string line in debug.CallStack)
+            using (_listView.PreservePosition())
             {
-                _listView.Items.Add(new ListViewItem(line));
-            }
+                _listView.BeginUpdate();
 
-            _listView.EndUpdate();
+                _listView.Items.Clear();
+
+                foreach (string line in debug.CallStack)
+                {
+                    _listView.Items.Add(new ListViewItem(line));
+                }
+
+                _listView.EndUpdate();
+            }
         }
 
         private void _listView_SizeChanged(object sender, EventArgs e)

@@ -39,18 +39,21 @@ namespace JintDebugger
 
             _listView.Enabled = true;
 
-            _listView.BeginUpdate();
-
-            _listView.Items.Clear();
-
-            var variables = mode == VariablesMode.Locals ? debug.Locals : debug.Globals;
-
-            foreach (var item in variables)
+            using (_listView.PreservePosition())
             {
-                AddVariable(item.Key, item.Value);
-            }
+                _listView.BeginUpdate();
 
-            _listView.EndUpdate();
+                _listView.Items.Clear();
+
+                var variables = mode == VariablesMode.Locals ? debug.Locals : debug.Globals;
+
+                foreach (var item in variables)
+                {
+                    AddVariable(item.Key, item.Value);
+                }
+
+                _listView.EndUpdate();
+            }
         }
 
         private void AddVariable(string name, JsValue value)
