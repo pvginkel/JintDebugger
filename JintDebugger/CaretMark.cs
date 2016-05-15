@@ -1,29 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
+using System.Windows.Forms;
 using ICSharpCode.TextEditor;
 using ICSharpCode.TextEditor.Document;
 
 namespace JintDebugger
 {
-    internal class CaretMark : Bookmark
+    internal class CaretMark : ImageBookmark
     {
+        private static readonly Image ExecutionPointer = NeutralResources.executionPointer;
+
         public CaretMark(IDocument document, TextLocation location)
-            : base(document, location)
+            : base(document, ExecutionPointer, location)
         {
         }
 
         public CaretMark(IDocument document, TextLocation location, bool isEnabled)
-            : base(document, location, isEnabled)
+            : base(document, ExecutionPointer, location, isEnabled)
         {
         }
 
-        public override void Draw(IconBarMargin margin, System.Drawing.Graphics g, System.Drawing.Point p)
-        {
-            margin.DrawArrow(g, p.Y);
-        }
-
-        public override bool Click(System.Windows.Forms.Control parent, System.Windows.Forms.MouseEventArgs e)
+        public override bool Click(Control parent, MouseEventArgs e)
         {
             return false;
         }

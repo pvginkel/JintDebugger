@@ -1,35 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Text;
+using System.Windows.Forms;
 using ICSharpCode.TextEditor;
 using ICSharpCode.TextEditor.Document;
 
 namespace JintDebugger
 {
-    internal class BreakPointMark : Bookmark
+    internal class BreakPointMark : ImageBookmark
     {
+        private static readonly Image Breakpoint = NeutralResources.breakpoint;
+
         public bool IsHealthy { get; set; }
+
         public event EventHandler Removed;
 
         protected virtual void OnRemoved(EventArgs e)
         {
-            var ev = Removed;
-            if (ev != null)
-                ev(this, e);
+            Removed?.Invoke(this, e);
         }
 
         public BreakPointMark(IDocument document, TextLocation location)
-            : base(document, location)
+            : base(document, Breakpoint, location)
         {
             IsHealthy = true;
         }
 
-        public override void Draw(IconBarMargin margin, System.Drawing.Graphics g, System.Drawing.Point p)
-        {
-            margin.DrawBreakpoint(g, p.Y, IsEnabled, IsHealthy);
-        }
-
-        public override bool Click(System.Windows.Forms.Control parent, System.Windows.Forms.MouseEventArgs e)
+        public override bool Click(Control parent, MouseEventArgs e)
         {
             bool result = base.Click(parent, e);
 
