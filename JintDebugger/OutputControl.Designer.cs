@@ -34,6 +34,7 @@
             // _textEditor
             // 
             this._textEditor.BackColor = System.Drawing.SystemColors.Window;
+            this._textEditor.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this._textEditor.Dock = System.Windows.Forms.DockStyle.Fill;
             this._textEditor.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this._textEditor.Location = new System.Drawing.Point(0, 0);
