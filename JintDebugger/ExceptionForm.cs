@@ -38,23 +38,36 @@ namespace JintDebugger
                 form._additionalInformation.Text = String.Format(form._additionalInformation.Text, GetMessage(exception));
                 form._location.Text = String.Format(form._location.Text, GetLocation(exception));
 
-                var callStack = new CallStackControl();
-                callStack.LoadCallStack(exception.DebugInformation);
-                form.ShowPanel(callStack);
-                var globalVariables = new VariablesControl
+                if (exception.DebugInformation == null || exception.DebugInformation.Globals.Count == 0)
                 {
-                    Text = "Globals"
-                };
-                globalVariables.LoadVariables(exception.DebugInformation, VariablesMode.Globals);
-                form.ShowPanel(globalVariables);
-                var localVariables = new VariablesControl
+                    form.Showing += (s, e) =>
+                    {
+                        int dockPanelHeight = form._dockPanel.Height;
+                        form._dockPanel.Dispose();
+                        form.MinimumSize = new Size(0, form.Height - dockPanelHeight);
+                        form.MaximumSize = new Size(int.MaxValue, form.Height - dockPanelHeight);
+                    };
+                }
+                else
                 {
-                    Text = "Locals"
-                };
-                localVariables.LoadVariables(exception.DebugInformation, VariablesMode.Locals);
-                form.ShowPanel(localVariables);
+                    var callStack = new CallStackControl();
+                    callStack.LoadCallStack(exception.DebugInformation);
+                    form.ShowPanel(callStack);
+                    var globalVariables = new VariablesControl
+                    {
+                        Text = "Globals"
+                    };
+                    globalVariables.LoadVariables(exception.DebugInformation, VariablesMode.Globals);
+                    form.ShowPanel(globalVariables);
+                    var localVariables = new VariablesControl
+                    {
+                        Text = "Locals"
+                    };
+                    localVariables.LoadVariables(exception.DebugInformation, VariablesMode.Locals);
+                    form.ShowPanel(localVariables);
 
-                callStack.DockHandler.Activate();
+                    callStack.DockHandler.Activate();
+                }
 
                 form.ShowDialog(owner);
             }

@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this._location = new System.Windows.Forms.Label();
             this._dockPanel = new WeifenLuo.WinFormsUI.Docking.DockPanel();
             this._exceptionThrown = new System.Windows.Forms.Label();
             this._additionalInformation = new System.Windows.Forms.Label();
             this._cancelButton = new System.Windows.Forms.Button();
-            this._location = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -56,8 +56,19 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(538, 330);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(566, 343);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // _location
+            // 
+            this._location.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this._location, 2);
+            this._location.Location = new System.Drawing.Point(3, 51);
+            this._location.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this._location.Name = "_location";
+            this._location.Size = new System.Drawing.Size(68, 13);
+            this._location.TabIndex = 4;
+            this._location.Text = "Location: {0}";
             // 
             // _dockPanel
             // 
@@ -67,7 +78,7 @@
             this._dockPanel.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingWindow;
             this._dockPanel.Location = new System.Drawing.Point(3, 72);
             this._dockPanel.Name = "_dockPanel";
-            this._dockPanel.Size = new System.Drawing.Size(532, 226);
+            this._dockPanel.Size = new System.Drawing.Size(560, 239);
             this._dockPanel.TabIndex = 3;
             // 
             // _exceptionThrown
@@ -95,33 +106,23 @@
             // _cancelButton
             // 
             this._cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this._cancelButton.Location = new System.Drawing.Point(460, 304);
+            this._cancelButton.Location = new System.Drawing.Point(488, 317);
             this._cancelButton.Name = "_cancelButton";
             this._cancelButton.Size = new System.Drawing.Size(75, 23);
             this._cancelButton.TabIndex = 2;
             this._cancelButton.Text = "Close";
             this._cancelButton.UseVisualStyleBackColor = true;
             // 
-            // _location
-            // 
-            this._location.AutoSize = true;
-            this.tableLayoutPanel1.SetColumnSpan(this._location, 2);
-            this._location.Location = new System.Drawing.Point(3, 51);
-            this._location.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this._location.Name = "_location";
-            this._location.Size = new System.Drawing.Size(68, 13);
-            this._location.TabIndex = 4;
-            this._location.Text = "Location: {0}";
-            // 
             // ExceptionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this._cancelButton;
-            this.ClientSize = new System.Drawing.Size(556, 348);
+            this.ClientSize = new System.Drawing.Size(584, 361);
             this.Controls.Add(this.tableLayoutPanel1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(600, 400);
             this.Name = "ExceptionForm";
             this.Padding = new System.Windows.Forms.Padding(9);
             this.ShowIcon = false;
