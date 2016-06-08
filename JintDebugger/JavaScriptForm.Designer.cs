@@ -519,6 +519,7 @@
             this.MainMenuStrip = this._menu;
             this.Name = "JavaScriptForm";
             this.Text = "JavaScript Console";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.JavaScriptForm_FormClosing);
             this._statusStrip.ResumeLayout(false);
             this._statusStrip.PerformLayout();
             this._debugToolStrip.ResumeLayout(false);

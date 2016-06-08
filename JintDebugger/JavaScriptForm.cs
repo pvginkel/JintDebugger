@@ -88,6 +88,21 @@ namespace JintDebugger
             SetDebugger(null);
         }
 
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.F3 | Keys.Control:
+                    FindWithCurrent(true);
+                    return true;
+                case Keys.F3 | Keys.Shift | Keys.Control:
+                    FindWithCurrent(false);
+                    return true;
+                default:
+                    return base.ProcessCmdKey(ref msg, keyData);
+            }
+        }
+
         private void SetDebugger(Debugger debugger)
         {
             _debugger?.Dispose();
@@ -533,8 +548,7 @@ namespace JintDebugger
         {
             if (_findAndReplaceForm == null)
             {
-                _findAndReplaceForm = new FindAndReplaceForm(this);
-                _findAndReplaceForm.Disposed += (s, ea) => _findAndReplaceForm = null;
+                EnsureFindForm();
                 _findAndReplaceForm.Show(this);
             }
             else
@@ -546,6 +560,26 @@ namespace JintDebugger
 
             if (!String.IsNullOrEmpty(ActiveEditor?.GetSelectedText()))
                 _findAndReplaceForm.FindWhat = ActiveEditor.GetSelectedText();
+        }
+
+        private void EnsureFindForm()
+        {
+            if (_findAndReplaceForm == null)
+            {
+                _findAndReplaceForm = new FindAndReplaceForm(this);
+                _findAndReplaceForm.Disposed += (s, ea) => _findAndReplaceForm = null;
+            }
+        }
+
+        private void FindWithCurrent(bool forward)
+        {
+            string selection = ActiveEditor?.GetSelectedText();
+            if (!String.IsNullOrEmpty(selection))
+            {
+                EnsureFindForm();
+                _findAndReplaceForm.FindWhat = selection;
+                (forward ? _findNext : _findPrevious).PerformClick();
+            }
         }
 
         private void _findNext_Click(object sender, EventArgs e)
@@ -562,6 +596,45 @@ namespace JintDebugger
                 _findAndReplace.PerformClick();
             else if (ActiveEditor != null)
                 _findAndReplaceForm.FindPrevious();
+        }
+
+        private void JavaScriptForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason != CloseReason.UserClosing)
+                return;
+
+            bool anyDirty = false;
+
+            foreach (var editor in _dockPanel.Documents.OfType<EditorControl>())
+            {
+                if (editor.IsDirty)
+                {
+                    anyDirty = true;
+                    break;
+                }
+            }
+
+            if (anyDirty)
+            {
+                var result = MessageBox.Show(this, "Do you want to save your change?", Text, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+                switch (result)
+                {
+                    case DialogResult.Yes:
+                        foreach (var editor in _dockPanel.Documents.OfType<EditorControl>())
+                        {
+                            if (!editor.Save())
+                            {
+                                e.Cancel = true;
+                                return;
+                            }
+                        }
+                        break;
+
+                    case DialogResult.Cancel:
+                        e.Cancel = true;
+                        return;
+                }
+            }
         }
     }
 }
