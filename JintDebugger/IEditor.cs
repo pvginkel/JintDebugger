@@ -20,5 +20,8 @@ namespace JintDebugger
         void Close(bool force);
         string GetText();
         void Show();
+        int GetLine();
+        void SetLine(int line);
+        string GetSelectedText();
     }
 }

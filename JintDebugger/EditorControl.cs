@@ -4,6 +4,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using ICSharpCode.TextEditor;
 using ICSharpCode.TextEditor.Document;
@@ -13,7 +14,7 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace JintDebugger
 {
-    internal partial class EditorControl : DockContent, IEditor
+    internal partial class EditorControl : DockContent, IEditor, IFindTarget
     {
         private readonly IStatusBarProvider _statusBarProvider;
         private string _tabText;
@@ -250,6 +251,142 @@ namespace JintDebugger
         public string GetText()
         {
             return _textEditor.Text;
+        }
+
+        public int GetLine()
+        {
+            return _textEditor.ActiveTextAreaControl.Caret.Line + 1;
+        }
+
+        public void SetLine(int line)
+        {
+            _textEditor.ActiveTextAreaControl.Caret.Line = line - 1;
+        }
+
+        public FindResult Find(string findWhat, string replaceWith, FindOptions options, bool resetStartPoint)
+        {
+            if (findWhat == null)
+                throw new ArgumentNullException("search");
+
+            var textArea = _textEditor.ActiveTextAreaControl;
+            var document = _textEditor.Document;
+            string text = document.TextContent;
+
+            int offset;
+
+            if (options.HasFlag(FindOptions.Backwards))
+            {
+                if (resetStartPoint)
+                    offset = text.Length;
+                else
+                    offset = textArea.Caret.Offset;
+            }
+            else
+            {
+                if (resetStartPoint)
+                    offset = 0;
+                else if (textArea.SelectionManager.HasSomethingSelected)
+                    offset = textArea.SelectionManager.SelectionCollection.Last().EndOffset;
+                else
+                    offset = textArea.Caret.Offset;
+            }
+
+            int matchLength;
+            bool found = FindInText(
+                findWhat,
+                options,
+                text,
+                offset,
+                out offset,
+                out matchLength
+            );
+
+            if (found)
+            {
+                if (replaceWith != null)
+                {
+                    _textEditor.Document.Replace(offset, matchLength, replaceWith);
+
+                    MarkSpan(GetTextSpan(document, offset, replaceWith.Length));
+
+                    return FindResult.Replaced;
+                }
+
+                MarkSpan(GetTextSpan(document, offset, matchLength));
+
+                return FindResult.Found;
+            }
+
+            if (!resetStartPoint)
+                return FindResult.EndOfDocument;
+
+            return FindResult.NotFound;
+        }
+
+        private void MarkSpan(TextSpan span)
+        {
+            var textarea = _textEditor.ActiveTextAreaControl;
+            var selectionManager = textarea.SelectionManager;
+
+            var start = new TextLocation(span.StartIndex, span.StartLine);
+
+            textarea.Caret.Position = start;
+
+            selectionManager.SetSelection(
+                start,
+                new TextLocation(span.EndIndex, span.EndLine)
+            );
+        }
+
+        private TextSpan GetTextSpan(IDocument document, int offset, int length)
+        {
+            var start = document.OffsetToPosition(offset);
+            var end = document.OffsetToPosition(offset + length);
+
+            return new TextSpan(start.Line, start.Column, end.Line, end.Column);
+        }
+
+        private bool FindInText(string find, FindOptions options, string text, int offset, out int found, out int matchLength)
+        {
+            found = 0;
+            matchLength = 0;
+
+            if (find == null)
+                throw new ArgumentNullException("find");
+            if (text == null)
+                throw new ArgumentNullException("text");
+
+            string pattern =
+                options.HasFlag(FindOptions.RegExp)
+                ? find
+                : Regex.Escape(find);
+
+            if (options.HasFlag(FindOptions.WholeWord))
+                pattern = @"\b" + pattern + @"\b";
+
+            var regexOptions = RegexOptions.Multiline;
+
+            if (!options.HasFlag(FindOptions.MatchCase))
+                regexOptions |= RegexOptions.IgnoreCase;
+            if (options.HasFlag(FindOptions.Backwards))
+                regexOptions |= RegexOptions.RightToLeft;
+
+            var match = new Regex(pattern, regexOptions).Match(text, offset);
+
+            bool isFound = match.Success;
+
+            if (isFound)
+            {
+                found = match.Index;
+                matchLength = match.Length;
+            }
+
+            return isFound;
+        }
+
+        public string GetSelectedText()
+        {
+            return _textEditor.ActiveTextAreaControl.SelectionManager.SelectedText;
         }
 
         public void SetText(string text)

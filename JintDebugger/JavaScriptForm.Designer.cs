@@ -57,6 +57,12 @@
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this._fileExit = new System.Windows.Forms.ToolStripMenuItem();
             this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this._findAndReplace = new System.Windows.Forms.ToolStripMenuItem();
+            this._findNext = new System.Windows.Forms.ToolStripMenuItem();
+            this._findPrevious = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
+            this._goToLine = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this._viewLocals = new System.Windows.Forms.ToolStripMenuItem();
             this._viewGlobals = new System.Windows.Forms.ToolStripMenuItem();
             this._viewCallStack = new System.Windows.Forms.ToolStripMenuItem();
@@ -328,6 +334,12 @@
             // viewToolStripMenuItem
             // 
             this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this._findAndReplace,
+            this._findNext,
+            this._findPrevious,
+            this.toolStripMenuItem6,
+            this._goToLine,
+            this.toolStripMenuItem3,
             this._viewLocals,
             this._viewGlobals,
             this._viewCallStack});
@@ -335,24 +347,66 @@
             this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.viewToolStripMenuItem.Text = "&View";
             // 
+            // _findAndReplace
+            // 
+            this._findAndReplace.Name = "_findAndReplace";
+            this._findAndReplace.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this._findAndReplace.Size = new System.Drawing.Size(204, 22);
+            this._findAndReplace.Text = "&Find and Replace";
+            this._findAndReplace.Click += new System.EventHandler(this._findAndReplace_Click);
+            // 
+            // _findNext
+            // 
+            this._findNext.Name = "_findNext";
+            this._findNext.ShortcutKeys = System.Windows.Forms.Keys.F3;
+            this._findNext.Size = new System.Drawing.Size(196, 22);
+            this._findNext.Text = "Find &Next";
+            this._findNext.Click += new System.EventHandler(this._findNext_Click);
+            // 
+            // _findPrevious
+            // 
+            this._findPrevious.Name = "_findPrevious";
+            this._findPrevious.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.F3)));
+            this._findPrevious.Size = new System.Drawing.Size(196, 22);
+            this._findPrevious.Text = "Find &Previous";
+            this._findPrevious.Click += new System.EventHandler(this._findPrevious_Click);
+            // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(193, 6);
+            // 
+            // _goToLine
+            // 
+            this._goToLine.Name = "_goToLine";
+            this._goToLine.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
+            this._goToLine.Size = new System.Drawing.Size(196, 22);
+            this._goToLine.Text = "&Go to Line";
+            this._goToLine.Click += new System.EventHandler(this._goToLine_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(193, 6);
+            // 
             // _viewLocals
             // 
             this._viewLocals.Name = "_viewLocals";
-            this._viewLocals.Size = new System.Drawing.Size(125, 22);
+            this._viewLocals.Size = new System.Drawing.Size(196, 22);
             this._viewLocals.Text = "&Locals";
             this._viewLocals.Click += new System.EventHandler(this._viewLocals_Click);
             // 
             // _viewGlobals
             // 
             this._viewGlobals.Name = "_viewGlobals";
-            this._viewGlobals.Size = new System.Drawing.Size(125, 22);
+            this._viewGlobals.Size = new System.Drawing.Size(196, 22);
             this._viewGlobals.Text = "&Globals";
             this._viewGlobals.Click += new System.EventHandler(this._viewGlobals_Click);
             // 
             // _viewCallStack
             // 
             this._viewCallStack.Name = "_viewCallStack";
-            this._viewCallStack.Size = new System.Drawing.Size(125, 22);
+            this._viewCallStack.Size = new System.Drawing.Size(196, 22);
             this._viewCallStack.Text = "&Call Stack";
             this._viewCallStack.Click += new System.EventHandler(this._viewCallStack_Click);
             // 
@@ -521,6 +575,12 @@
         private System.Windows.Forms.ToolStripMenuItem _debugStepOver;
         private System.Windows.Forms.ToolStripMenuItem _debugStepOut;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem _findAndReplace;
+        private System.Windows.Forms.ToolStripMenuItem _findNext;
+        private System.Windows.Forms.ToolStripMenuItem _findPrevious;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
+        private System.Windows.Forms.ToolStripMenuItem _goToLine;
     }
 }
 

@@ -73,16 +73,33 @@
     <Compile Include="ExceptionForm.Designer.cs">
       <DependentUpon>ExceptionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="FindAndReplaceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FindAndReplaceForm.Designer.cs">
+      <DependentUpon>FindAndReplaceForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="FirebugConsole.cs" />
     <Compile Include="FirebugConsoleMessageStyle.cs" />
+    <Compile Include="GoToLineForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GoToLineForm.Designer.cs">
+      <DependentUpon>GoToLineForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="IEditor.cs" />
+    <Compile Include="IFindTarget.cs" />
     <Compile Include="IFirebugConsoleOutput.cs" />
+    <Compile Include="IHasActiveEditor.cs" />
     <Compile Include="IJintSessionCallback.cs" />
     <Compile Include="Debugger.cs" />
     <Compile Include="ImageBookmark.cs" />
     <Compile Include="JintDebuggerSteppedEventHandler.cs" />
     <Compile Include="JintDebuggerStoppedEventHandler.cs" />
     <Compile Include="ListViewExtensions.cs" />
+    <Compile Include="FindOptions.cs" />
+    <Compile Include="FindResult.cs" />
+    <Compile Include="TextSpan.cs" />
     <Compile Include="Session.cs" />
     <Compile Include="StandardConsoleOutput.cs" />
     <Compile Include="Support\DockPanelTheme\Resources.Designer.cs">
@@ -164,6 +181,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ExceptionForm.resx">
       <DependentUpon>ExceptionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FindAndReplaceForm.resx">
+      <DependentUpon>FindAndReplaceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GoToLineForm.resx">
+      <DependentUpon>GoToLineForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Support\DockPanelTheme\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

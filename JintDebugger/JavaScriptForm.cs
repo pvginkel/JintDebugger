@@ -15,7 +15,7 @@ using VS2012LightTheme = JintDebugger.Support.DockPanelTheme.VS2012LightTheme;
 
 namespace JintDebugger
 {
-    public partial class JavaScriptForm : SystemEx.Windows.Forms.Form, IStatusBarProvider
+    public partial class JavaScriptForm : SystemEx.Windows.Forms.Form, IStatusBarProvider, IHasActiveEditor
     {
         public const string FileDialogFilter = "JavaScript (*.js)|*.js|All Files (*.*)|*.*";
         private static readonly Color StatusBarNormalColor = Color.FromArgb(0, 122, 204);
@@ -28,6 +28,8 @@ namespace JintDebugger
         private Debugger _debugger;
         private readonly Dictionary<Script, EditorControl> _debugControls = new Dictionary<Script, EditorControl>();
         private EditorControl _lastStepControl;
+        private FindAndReplaceForm _findAndReplaceForm;
+        private EventHandler _activeEditorChanged;
 
         protected new MenuStrip Menu => _menu;
 
@@ -38,6 +40,14 @@ namespace JintDebugger
         public event EngineCreatedEventHandler EngineCreated;
 
         private IEditor ActiveEditor => _dockPanel.ActiveDocument as IEditor;
+
+        IEditor IHasActiveEditor.ActiveEditor => ActiveEditor;
+
+        event EventHandler IHasActiveEditor.ActiveEditorChanged
+        {
+            add { _activeEditorChanged += value; }
+            remove { _activeEditorChanged -= value; }
+        }
 
         public event EditorEventHandler EditorOpened;
 
@@ -300,6 +310,8 @@ namespace JintDebugger
 
         private void UpdateEnabled()
         {
+            _activeEditorChanged?.Invoke(this, EventArgs.Empty);
+
             bool haveEditor = ActiveEditor != null && _debugger == null;
 
             _fileSave.Enabled = haveEditor;
@@ -307,6 +319,10 @@ namespace JintDebugger
             _fileClose.Enabled = haveEditor;
             _windowNextTab.Enabled = haveEditor;
             _windowPreviousTab.Enabled = haveEditor;
+            _goToLine.Enabled = haveEditor;
+            _findAndReplace.Enabled = haveEditor;
+            _findNext.Enabled = haveEditor;
+            _findPrevious.Enabled = haveEditor;
 
             if (_debugger == null)
             {
@@ -501,6 +517,51 @@ namespace JintDebugger
         protected internal virtual void OnEditorClosed(EditorEventArgs e)
         {
             EditorClosed?.Invoke(this, e);
+        }
+
+        private void _goToLine_Click(object sender, EventArgs e)
+        {
+            using (var form = new GoToLineForm())
+            {
+                form.Line = ActiveEditor.GetLine();
+                if (form.ShowDialog(this) == DialogResult.OK)
+                    ActiveEditor.SetLine(form.Line);
+            }
+        }
+
+        private void _findAndReplace_Click(object sender, EventArgs e)
+        {
+            if (_findAndReplaceForm == null)
+            {
+                _findAndReplaceForm = new FindAndReplaceForm(this);
+                _findAndReplaceForm.Disposed += (s, ea) => _findAndReplaceForm = null;
+                _findAndReplaceForm.Show(this);
+            }
+            else
+            {
+                _findAndReplaceForm.Visible = true;
+                _findAndReplaceForm.Focus();
+            }
+
+
+            if (!String.IsNullOrEmpty(ActiveEditor?.GetSelectedText()))
+                _findAndReplaceForm.FindWhat = ActiveEditor.GetSelectedText();
+        }
+
+        private void _findNext_Click(object sender, EventArgs e)
+        {
+            if (_findAndReplaceForm == null)
+                _findAndReplace.PerformClick();
+            else if (ActiveEditor != null)
+                _findAndReplaceForm.FindNext();
+        }
+
+        private void _findPrevious_Click(object sender, EventArgs e)
+        {
+            if (_findAndReplaceForm == null)
+                _findAndReplace.PerformClick();
+            else if (ActiveEditor != null)
+                _findAndReplaceForm.FindPrevious();
         }
     }
 }
