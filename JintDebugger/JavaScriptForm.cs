@@ -560,6 +560,8 @@ namespace JintDebugger
 
             if (!String.IsNullOrEmpty(ActiveEditor?.GetSelectedText()))
                 _findAndReplaceForm.FindWhat = ActiveEditor.GetSelectedText();
+            else
+                _findAndReplaceForm.FindWhat = _findAndReplaceForm.FindWhat;
         }
 
         private void EnsureFindForm()
