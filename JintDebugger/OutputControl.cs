@@ -60,7 +60,7 @@ namespace JintDebugger
 
             public void Log(FirebugConsoleMessageStyle style, string value)
             {
-                value = NewlineRe.Replace(value, p => Environment.NewLine);
+                value = NewlineRe.Replace(value ?? "", p => Environment.NewLine);
 
                 _textEditor.BeginInvoke(new Action<string>(AppendText), value);
             }
