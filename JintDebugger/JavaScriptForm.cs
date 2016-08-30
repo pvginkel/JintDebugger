@@ -429,8 +429,15 @@ namespace JintDebugger
 
         public void SetStatus(string status)
         {
-            _statusLabel.Text = status?.Replace("&", "&&");
-            _statusStrip.Update();
+            if (InvokeRequired)
+            {
+                BeginInvoke(new Action<string>(SetStatus), status);
+            }
+            else
+            {
+                _statusLabel.Text = status?.Replace("&", "&&");
+                _statusStrip.Update();
+            }
         }
 
         private void _fileExit_Click(object sender, EventArgs e)
